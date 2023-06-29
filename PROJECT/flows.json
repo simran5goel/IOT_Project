@@ -1,0 +1,467 @@
+[
+    {
+        "id": "75dabccce95f70af",
+        "type": "tab",
+        "label": "Flow 14",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6f1f607617d5113f",
+        "type": "ibmiot in",
+        "z": "75dabccce95f70af",
+        "authentication": "apiKey",
+        "apiKey": "66e062690c08039b",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "abcd",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": false,
+        "qos": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "b448693e5066c825",
+                "39f660520725b360",
+                "3320ba9dd9f10fce"
+            ]
+        ]
+    },
+    {
+        "id": "d31f4a8a6c82e250",
+        "type": "debug",
+        "z": "75dabccce95f70af",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4e837497d76a6386",
+        "type": "inject",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "d31f4a8a6c82e250"
+            ]
+        ]
+    },
+    {
+        "id": "b448693e5066c825",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "Code",
+        "func": "msg.payload = msg.payload.Code;\nglobal.set(\"c\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 100,
+        "wires": [
+            [
+                "d31f4a8a6c82e250"
+            ]
+        ]
+    },
+    {
+        "id": "9b856e0e0e5cf45a",
+        "type": "http response",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "90f3106297435afc",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "code",
+        "func": "msg.payload = {\"Code\": global.get('c')}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [
+                "9b856e0e0e5cf45a"
+            ]
+        ]
+    },
+    {
+        "id": "f36b6013e2f9a567",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/code",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 260,
+        "wires": [
+            [
+                "90f3106297435afc"
+            ]
+        ]
+    },
+    {
+        "id": "b188f5679c7a6d76",
+        "type": "ibmiot out",
+        "z": "75dabccce95f70af",
+        "authentication": "apiKey",
+        "apiKey": "66e062690c08039b",
+        "outputType": "cmd",
+        "deviceId": "1234",
+        "deviceType": "abcd",
+        "eventCommandType": "command",
+        "format": "String",
+        "data": "Data",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 580,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e507d9a4d55db410",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/command",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 460,
+        "wires": [
+            [
+                "a095d8984f97aada",
+                "6ed2c98881c8bb26",
+                "b188f5679c7a6d76"
+            ]
+        ]
+    },
+    {
+        "id": "6ed2c98881c8bb26",
+        "type": "debug",
+        "z": "75dabccce95f70af",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a095d8984f97aada",
+        "type": "http response",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "39f660520725b360",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "Distance",
+        "func": "msg.payload = msg.payload.Distance;\nglobal.set(\"d\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "d31f4a8a6c82e250"
+            ]
+        ]
+    },
+    {
+        "id": "140814d48679968c",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "distance",
+        "func": "msg.payload = {\"Distance\": global.get('d')}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "9b856e0e0e5cf45a"
+            ]
+        ]
+    },
+    {
+        "id": "3dd8955d8ae04590",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/distance",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "140814d48679968c"
+            ]
+        ]
+    },
+    {
+        "id": "3320ba9dd9f10fce",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "Servo Position",
+        "func": "msg.payload = msg.payload.ServoPos;\nglobal.set(\"s\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "d31f4a8a6c82e250"
+            ]
+        ]
+    },
+    {
+        "id": "51cee0612009d393",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "position",
+        "func": "msg.payload = {\"ServoPos\": global.get('s')}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "9b856e0e0e5cf45a"
+            ]
+        ]
+    },
+    {
+        "id": "6e4126353ad78a8f",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/position",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "51cee0612009d393"
+            ]
+        ]
+    },
+    {
+        "id": "41b31c2dc22d5e84",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/userResponse",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "d285867fc51c4119",
+                "b188f5679c7a6d76"
+            ]
+        ]
+    },
+    {
+        "id": "d285867fc51c4119",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "Response",
+        "func": "msg.payload = msg.payload.userResponse;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 540,
+        "wires": [
+            [
+                "a095d8984f97aada"
+            ]
+        ]
+    },
+    {
+        "id": "ba3a4d82fefb9d68",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "PressedState",
+        "func": "msg.payload = global.get(\"val\");\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "9b856e0e0e5cf45a"
+            ]
+        ]
+    },
+    {
+        "id": "59ab526e5814f7e9",
+        "type": "http in",
+        "z": "75dabccce95f70af",
+        "name": "",
+        "url": "/value",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 400,
+        "wires": [
+            [
+                "ba3a4d82fefb9d68"
+            ]
+        ]
+    },
+    {
+        "id": "607281420ba54bbe",
+        "type": "function",
+        "z": "75dabccce95f70af",
+        "name": "Pressed Value",
+        "func": "global.set(\"val\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "d31f4a8a6c82e250"
+            ]
+        ]
+    },
+    {
+        "id": "3c3b7acc8149f6ef",
+        "type": "ibmiot in",
+        "z": "75dabccce95f70af",
+        "authentication": "apiKey",
+        "apiKey": "66e062690c08039b",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "abcd",
+        "eventType": "+",
+        "commandType": "",
+        "format": "",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": true,
+        "qos": 0,
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "607281420ba54bbe"
+            ]
+        ]
+    },
+    {
+        "id": "66e062690c08039b",
+        "type": "ibmiot",
+        "name": "",
+        "keepalive": "60",
+        "serverName": "",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    }
+]
