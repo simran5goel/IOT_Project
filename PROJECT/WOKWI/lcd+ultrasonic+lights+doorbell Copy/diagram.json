@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "author": "SIMRAN GOEL 20BEE0359",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp1", "top": 92.53, "left": 38.92, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -94.99,
+      "left": 176.31,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-membrane-keypad",
+      "id": "keypad1",
+      "top": -127.75,
+      "left": -224.23,
+      "attrs": {}
+    },
+    { "type": "wokwi-servo", "id": "servo1", "top": 77.94, "left": 208.63, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 182.98,
+      "left": 268.77,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 295.27,
+      "left": 310.08,
+      "rotate": 90,
+      "attrs": { "value": "100" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": 173.75,
+      "left": -346.7,
+      "attrs": { "distance": "209" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 157.96,
+      "left": 443.28,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd2",
+      "top": 353.92,
+      "left": 187.77,
+      "attrs": { "pins": "i2c", "i2c-address": "0x26"}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 407.58,
+      "left": 0.19,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 368.96,
+      "left": -78.47,
+      "attrs": { "value": "1000" }
+    }
+  ],
+  "connections": [
+    [ "lcd1:SDA", "esp1:D21", "green", [ "h0" ] ],
+    [ "lcd1:SCL", "esp1:D22", "blue", [ "h0" ] ],
+    [ "lcd1:GND", "esp1:GND.2", "black", [ "h-135.21", "v211.85" ] ],
+    [ "lcd1:VCC", "esp1:3V3", "red", [ "h0" ] ],
+    [ "keypad1:R1", "esp1:D12", "green", [ "v0" ] ],
+    [ "keypad1:R2", "esp1:D13", "green", [ "v0" ] ],
+    [ "keypad1:R3", "esp1:D14", "green", [ "v0" ] ],
+    [ "keypad1:R4", "esp1:D15", "green", [ "v0" ] ],
+    [ "keypad1:C1", "esp1:D26", "blue", [ "v0" ] ],
+    [ "keypad1:C2", "esp1:D25", "blue", [ "v0" ] ],
+    [ "keypad1:C4", "esp1:D23", "blue", [ "v0" ] ],
+    [ "keypad1:C3", "esp1:D27", "blue", [ "v0" ] ],
+    [ "servo1:GND", "esp1:GND.1", "black", [ "h0" ] ],
+    [ "servo1:V+", "esp1:3V3", "green", [ "h0" ] ],
+    [ "servo1:PWM", "esp1:D32", "green", [ "h0" ] ],
+    [ "ultrasonic1:GND", "esp1:GND.2", "black", [ "v0" ] ],
+    [ "ultrasonic1:ECHO", "esp1:D5", "green", [ "v30.71", "h195.19", "v0" ] ],
+    [ "ultrasonic1:TRIG", "esp1:D18", "green", [ "v15.66", "h225.12", "v-2.44" ] ],
+    [ "ultrasonic1:VCC", "esp1:3V3", "red", [ "v25.42", "h246.1", "v-0.41" ] ],
+    [ "bz1:2", "esp1:D19", "green", [ "v0" ] ],
+    [ "bz1:1", "esp1:GND.1", "green", [ "v0" ] ],
+    [ "led1:A", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "esp1:D2", "green", [ "h-94.24", "v7.18" ] ],
+    [ "esp1:GND.2", "led1:C", "black", [ "h-34.29", "v52.57", "h277.76" ] ],
+    [ "esp1:3V3", "lcd2:VCC", "red", [ "v-0.07", "h40.72", "v142.02" ] ],
+    [ "esp1:GND.1", "lcd2:GND", "black", [ "h27.24", "v140.05" ] ],
+    [ "esp1:GND.2", "r2:1", "black", [ "h-140.84", "v22.07" ] ],
+    [ "r2:2", "btn1:1.l", "black", [ "v-0.81", "h8.99", "v46.72" ] ],
+    [ "esp1:VIN", "btn1:2.l", "red", [ "h-171.98", "v179.07" ] ],
+    [ "esp1:D4", "btn1:1.r", "violet", [ "h52.73", "v112.16", "h-82.65", "v89.84" ] ],
+    [ "lcd2:SCL", "lcd1:SCL", "blue", [ "h-30.65", "v-434.13" ] ],
+    [ "lcd2:SDA", "lcd1:SDA", "gold", [ "h-45.57", "v-5.22" ] ]
+  ],
+  "dependencies": {}
+}
